@@ -1,0 +1,9 @@
+header {
+    height: 20vh;
+}
+
+img:hover{
+    width: 270px;
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
+}

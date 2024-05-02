@@ -1,0 +1,39 @@
+<section class="d-flex flex-column align-items-center justify-content-center bg-body-tertiary">
+    <div class="w-sm-75 w-75 mt-5">
+        <select class="fw-bold form-select mb-3 p-sm-3 border-dark" aria-label="Default select example" (change)="onSearchTypeChange($event)">
+            <option selected>Select an option to start a search</option>
+            <option value="number">Search by number</option>
+            <option value="name">Search by name</option>
+            <option value="type">Search by type</option>
+        </select>
+        <input *ngIf="searchType === 'number'" type="number" class="fw-bold form-control border-dark p-sm-3"
+            placeholder="Search your pokemon by number" [(ngModel)]="searchByNumber" (input)="searchPokemon()">
+        <input *ngIf="searchType === 'name'" type="text" class="fw-bold form-control border-dark p-sm-3"
+            placeholder="Search your pokemon by name" [(ngModel)]="searchTerm" (input)="searchPokemon()">
+        <input *ngIf="searchType === 'type'" type="text" class="fw-bold form-control border-dark p-sm-3"
+            placeholder="Search your pokemon by type" [(ngModel)]="searchByType" (input)="searchPokemon()">
+    </div>
+    <div class="table-responsive mt-5 mb-5 container">
+        <table *ngIf="filteredPokemonList.length > 0" class="table table-responsive table-dark table-hover table-bordered text-center align-middle">
+            <thead class="border-secondary text-center">
+                <tr class="text-uppercase">
+                    <th>#</th>
+                    <th>Icon</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody class="text-center text-capitalize">
+                <tr *ngFor="let pokemon of filteredPokemonList">
+                    <td class="">{{ pokemon.number }}</td>
+                    <td><img [src]="pokemon.image" alt="Imagen de {{ pokemon.name }}"></td>
+                    <td>{{ pokemon.name }}</td>
+                    <td>
+                        <span>{{ pokemon.type }}</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h1 *ngIf="filteredPokemonList.length === 0" class="bg-danger text-center text-white p-2">No Pokémon found.</h1>
+    </div>
+</section>
